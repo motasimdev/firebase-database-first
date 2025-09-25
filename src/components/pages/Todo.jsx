@@ -14,7 +14,7 @@ const Todo = () => {
   const [task, setTask] = useState("");
   const [taskError, setTaskerror] = useState("");
   const db = getDatabase();
-  const [viewTask, setViewtask] = useState([])
+  const [viewTask, setViewtask] = useState([]);
 
   const handleTaskInput = (e) => {
     setTask(e.target.value);
@@ -45,7 +45,8 @@ const Todo = () => {
       // console.log(item.val());
       arr.push(item.val());
     });
-    console.log(arr);
+    setViewtask(arr)
+    console.log(viewTask);
   });
   // read data
   return (
