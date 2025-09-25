@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../Container";
 import { getDatabase, ref, set, push, onValue } from "firebase/database";
 import {
@@ -35,19 +35,21 @@ const Todo = () => {
   };
 
   // read data
-  const todotaskRef = ref(db, "todotask/");
-  onValue(todotaskRef, (snapshot) => {
-    // const data = snapshot.val();
-    // updateStarCount(postElement, data);
-    // console.log(snapshot.val());
-    let arr = [];
-    snapshot.forEach((item) => {
-      // console.log(item.val());
-      arr.push(item.val());
+  useEffect(() => {
+    const todotaskRef = ref(db, "todotask/");
+    onValue(todotaskRef, (snapshot) => {
+      // const data = snapshot.val();
+      // updateStarCount(postElement, data);
+      // console.log(snapshot.val());
+      let arr = [];
+      snapshot.forEach((item) => {
+        // console.log(item.val());
+        arr.push(item.val());
+      });
+      setViewtask(arr);
+      console.log(viewTask);
     });
-    setViewtask(arr)
-    console.log(viewTask);
-  });
+  }, []);
   // read data
   return (
     <>
