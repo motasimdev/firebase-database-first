@@ -23,14 +23,11 @@ const Todo = () => {
     if (!task) {
       setTaskerror("Task is missing");
     } else {
-      set(
-        push(ref(db, "todotask/")),
-        {
-          name: task,
-        }
-        // .then(alert("success"))
-        // .catch("error")
-      );
+      set(push(ref(db, "todotask/")), {
+        name: task,
+      })
+        .then()
+        .catch("error");
     }
   };
 
@@ -47,7 +44,7 @@ const Todo = () => {
         arr.push(item.val());
       });
       setViewtask(arr);
-      console.log(viewTask);
+      // console.log(viewTask);
     });
   }, []);
   // read data
@@ -88,22 +85,25 @@ const Todo = () => {
                 </TableHeadCell>
               </TableHead>
               <TableBody className="divide-y">
-                <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                  <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                    Apple MacBook Pro 17"
-                  </TableCell>
-                  <TableCell>Sliver</TableCell>
-                  <TableCell>Laptop</TableCell>
-                  <TableCell>$2999</TableCell>
-                  <TableCell>
-                    <a
-                      href="#"
-                      className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                    >
-                      Edit
-                    </a>
-                  </TableCell>
-                </TableRow>
+                {viewTask.map((item) => (
+                  <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                    <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                      {item.name}
+                    </TableCell>
+
+                    <TableCell>Sliver</TableCell>
+                    <TableCell>Laptop</TableCell>
+                    <TableCell>$2999</TableCell>
+                    <TableCell>
+                      <a
+                        href="#"
+                        className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                      >
+                        Edit
+                      </a>
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </div>
