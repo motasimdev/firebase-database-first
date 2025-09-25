@@ -14,6 +14,7 @@ const Todo = () => {
   const [task, setTask] = useState("");
   const [taskError, setTaskerror] = useState("");
   const db = getDatabase();
+  const [viewTask, setViewtask] = useState([])
 
   const handleTaskInput = (e) => {
     setTask(e.target.value);
@@ -27,25 +28,25 @@ const Todo = () => {
         {
           name: task,
         }
-          // .then(alert("success"))
-          // .catch("error")
+        // .then(alert("success"))
+        // .catch("error")
       );
     }
   };
 
   // read data
-  const todotaskRef = ref(db, 'todotask/');
+  const todotaskRef = ref(db, "todotask/");
   onValue(todotaskRef, (snapshot) => {
-  // const data = snapshot.val();
-  // updateStarCount(postElement, data);
-  // console.log(snapshot.val());
-  let arr = []
-  snapshot.forEach((item)=>{
-    console.log(item.val());
-    
-  })
-  
-});
+    // const data = snapshot.val();
+    // updateStarCount(postElement, data);
+    // console.log(snapshot.val());
+    let arr = [];
+    snapshot.forEach((item) => {
+      // console.log(item.val());
+      arr.push(item.val());
+    });
+    console.log(arr);
+  });
   // read data
   return (
     <>
@@ -71,7 +72,6 @@ const Todo = () => {
               Submit
             </button>
           </div>
-
 
           <div className="overflow-x-auto mt-5">
             <Table striped>
@@ -101,7 +101,6 @@ const Todo = () => {
                     </a>
                   </TableCell>
                 </TableRow>
-                
               </TableBody>
             </Table>
           </div>
