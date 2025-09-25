@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Container from "../Container";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, push } from "firebase/database";
 
 const Todo = () => {
   const [task, setTask] = useState("");
@@ -14,9 +14,14 @@ const Todo = () => {
     if (!task) {
       setTaskerror("Task is missing");
     } else {
-      set(ref(db, 'todotask/'), {
-        name: task
-      });
+      set(
+        push(ref(db, "todotask/")),
+        {
+          name: task,
+        }
+          .then(alert("success"))
+          .catch("error")
+      );
     }
   };
   return (
